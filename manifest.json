@@ -1,0 +1,8 @@
+{
+  "name": "ZIST Beneficiary Management",
+  "short_name": "ZIST",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2c7a7b"
+}
