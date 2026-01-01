@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZIST Beneficiary Management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c7a7b;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 16px;
+    }
+    button {
+      background: #2c7a7b;
+      color: white;
+      border: none;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .success {
+      color: green;
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<h1>ZIST Beneficiary</h1>
+
+<label>Beneficiary Name</label>
+<input id="name">
+
+<label>Beneficiary Type</label>
+<select id="type">
+  <option>Widow</option>
+  <option>Orphan</option>
+  <option>Disabled</option>
+  <option>Needy Family</option>
+</select>
+
+<button onclick="saveBeneficiary()">Save Beneficiary</button>
+
+<div class="success" id="msg"></div>
+
+<script>
+  function saveBeneficiary() {
+    const name = document.getElementById("name").value;
+    const type = document.getElementById("type").value;
+
+    if (!name) {
+      alert("Please enter name");
+      return;
+    }
+
+    const data = JSON.parse(localStorage.getItem("beneficiaries") || "[]");
+    data.push({ name, type });
+    localStorage.setItem("beneficiaries", JSON.stringify(data));
+
+    document.getElementById("msg").innerText = "Beneficiary saved successfully";
+    document.getElementById("name").value = "";
+  }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+</script>
+
+</body>
+</html>
