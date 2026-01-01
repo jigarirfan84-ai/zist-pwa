@@ -108,7 +108,33 @@ function saveBeneficiary() {
   alert("Beneficiary saved successfully");
 }
 </script>
+<script>
+function saveBeneficiary() {
+  const name = document.getElementById("beneficiaryName").value.trim();
+  const type = document.getElementById("beneficiaryType").value;
+
+  if (name === "") {
+    alert("Please enter Beneficiary Name");
+    return;
+  }
+
+  let beneficiaries = JSON.parse(localStorage.getItem("zist_beneficiaries")) || [];
+
+  beneficiaries.push({
+    name: name,
+    type: type,
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("zist_beneficiaries", JSON.stringify(beneficiaries));
+
+  alert("Beneficiary saved successfully");
+
+  document.getElementById("beneficiaryName").value = "";
+}
+</script>
 
 </body>
 </html>
+
 
