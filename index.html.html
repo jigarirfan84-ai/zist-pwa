@@ -82,6 +82,33 @@
     navigator.serviceWorker.register('service-worker.js');
   }
 </script>
+<script>
+function saveBeneficiary() {
+  const name = document.getElementById("beneficiaryName").value;
+  const type = document.getElementById("beneficiaryType").value;
+
+  if (!name || !type) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  let beneficiaries = JSON.parse(localStorage.getItem("beneficiaries")) || [];
+
+  beneficiaries.push({
+    name: name,
+    type: type,
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("beneficiaries", JSON.stringify(beneficiaries));
+
+  document.getElementById("beneficiaryName").value = "";
+  document.getElementById("beneficiaryType").value = "";
+
+  alert("Beneficiary saved successfully");
+}
+</script>
 
 </body>
 </html>
+
